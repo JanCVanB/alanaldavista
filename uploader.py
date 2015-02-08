@@ -98,8 +98,7 @@ def do_main(team_id, access_key, secret_key,
 
 if __name__ == '__main__':
 
-    team_id = 'YOUR-TEAM-ID'
-    access_key = 'YOUR-ACCESS-KEY'
-    secret_key = 'YOUR-SECRET-KEY'
+    with open('AWSkeys.txt') as aws_key_file:
+        team_id, access_key, secret_key = aws_key_file.read().split(',')
 
     do_main(team_id, access_key, secret_key)
