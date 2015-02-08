@@ -7,6 +7,14 @@ import re
 alpha = 0.85
 
 
+def pad_zeroes(x):
+    """pad_zeroes takes a string representation of an integer and returns
+    a length of 9 representation of it. For sorting purposes."""
+    if len(x) > 9:
+        raise ValueError("Cannot handle indices greater than 999,999,999.")
+    return (9 - len(x)) * "0" + x
+
+
 def line_parse(s):
     """line_parse takes a "NodeID..." string and returns a tuple of its
     identifier, current PageRank, previous PageRank, the nodes its node links
@@ -21,9 +29,9 @@ def line_parse(s):
 
     # If there is no iteration AKA first iteration
     if data[1] is None:
-        data = (data[0], 1, data[2], data[3], data[4].split(","))
+        data = (data[0], "1", data[2], data[3], data[4].split(","))
     else:
-        data = (data[0], int(data[1][1:]), data[2], data[3], data[4].split(","))
+        data = (data[0], data[1][1:], data[2], data[3], data[4].split(","))
 
     return data
 
@@ -33,10 +41,10 @@ for line in sys.stdin:
     # output is either iNUM\trNUM which is part of PageRank of i
     # or iNUM\tvSTRINGofNUMS which is the way we're saving the data.
     for friend in data[4]:
-        print friend
-        sys.stdout.write("i%s\tr%s\n" % (friend, alpha * float(data[2])
+        sys.stdout.write("i%s\tr%s\n" % (pad_zeroes(friend),
+                                         alpha * float(data[2])
                                          / float(len(data[4]))))
 
-    sys.stdout.write("i%s\tv%s\n" % (data[0],
-                     str(data[1]) + "," + str(data[2]) + "," + str(data[3])
+    sys.stdout.write("i%s\tv%s\n" % (pad_zeroes(data[0]),
+                     data[1] + "," + data[2] + "," + data[3]
                      + "," + ",".join(data[4])))
