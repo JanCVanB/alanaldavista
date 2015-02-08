@@ -29,7 +29,7 @@ def line_parse(s):
 
     # If there is no iteration AKA first iteration
     if data[1] is None:
-        data = (data[0], "1", data[2], data[3], data[4].split(","))
+        data = (data[0], "0", data[2], data[3], data[4].split(","))
     else:
         data = (data[0], data[1][1:], data[2], data[3], data[4].split(","))
 
