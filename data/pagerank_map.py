@@ -4,6 +4,9 @@ import sys
 import re
 
 
+alpha = 0.85
+
+
 def line_parse(s):
     """line_parse takes a "NodeID..." string and returns a tuple of its
     identifier, current PageRank, previous PageRank, the nodes its node links
@@ -31,7 +34,7 @@ for line in sys.stdin:
     # or iNUM\tvSTRINGofNUMS which is the way we're saving the data.
     for friend in data[4]:
         print friend
-        sys.stdout.write("i%s\tr%s\n" % (friend, 0.85 * float(data[2])
+        sys.stdout.write("i%s\tr%s\n" % (friend, alpha * float(data[2])
                                          / float(len(data[4]))))
 
     sys.stdout.write("i%s\tv%s\n" % (data[0],
