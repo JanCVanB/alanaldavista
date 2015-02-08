@@ -6,6 +6,9 @@ import re
 
 alpha = 0.85
 
+get_data_string = "NodeId:(\d*)(,\d*)?\t(\d*.\d*),(\d*.\d*)\,?(.*)?"
+get_data_regex = re.compile(get_data_string)
+
 
 def pad_zeroes(x):
     """pad_zeroes takes a string representation of an integer and returns
@@ -19,9 +22,6 @@ def line_parse(s):
     """line_parse takes a "NodeID..." string and returns a tuple of its
     identifier, current PageRank, previous PageRank, the nodes its node links
     to, and if this isn't the first iteration, the iteration number."""
-
-    get_data_string = "NodeId:(\d*)(,\d*)?\t(\d*.\d*),(\d*.\d*)\,?(.*)?"
-    get_data_regex = re.compile(get_data_string)
 
     # Data is of form (index, [iteration,] current PageRank, previous PageRank,
     # list_of_neighbors)
