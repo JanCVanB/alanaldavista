@@ -28,7 +28,7 @@ def compute_min():
 
 def unpad_zeroes(s):
     n = 0
-    while s[n] == "0":
+    while s[n] == "0" and n != 8:
         n += 1
     return s[n:]
 
