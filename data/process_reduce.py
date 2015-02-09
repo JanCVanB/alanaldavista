@@ -4,11 +4,9 @@ import sys
 import re
 import operator
 
-# TODO: HANDLE CASE WHERE DONE BEFORE 50th ITERATION
 
-
-get_score_string = "\d{9}\t\d{1,2},(\d*.\d*)"
-get_score_regex = re.compile(get_score_string)
+# get_score_string = "\d{9}\t\d{1,2},(\d*.\d*)"
+# get_score_regex = re.compile(get_score_string)
 
 min_node = "-1"
 top_20 = {}
@@ -41,9 +39,10 @@ for line in sys.stdin:
         iteration = int(line[10:12])
 
     # End computation.
-    if iteration == 50:
+    if iteration == 10:
         node = line[:9]
-        score = float(get_score_regex.match(line).group(1))
+        # score = float(get_score_regex.match(line).group(1))
+        score = float(re.match("\d{9}\t\d{1,2},(\d*.\d*)", line).group(1))
 
         if len(top_20) < 20:
             top_20[node] = score

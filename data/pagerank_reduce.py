@@ -6,8 +6,8 @@ import re
 
 alpha = 0.85
 
-get_values_string = "v(\d+),(\d*.\d*),(\d*.\d*),?(.*)?"
-get_values_regex = re.compile(get_values_string)
+# get_values_string = "v(\d+),(\d*.\d*),(\d*.\d*),?(.*)?"
+# get_values_regex = re.compile(get_values_string)
 
 key = None
 prev_key = None
@@ -39,7 +39,8 @@ for line in sys.stdin:
 
     # This tuple contains the other information for the node.
     else:
-        value = get_values_regex.match(value).groups()
+        # value = get_values_regex.match(value).groups()
+        value = re.match("v(\d+),(\d*.\d*),(\d*.\d*),?(.*)", value).groups()
         # Increase iteration
         key_data[0] = str(int(value[0]) + 1)
         key_data[2] = value[1]

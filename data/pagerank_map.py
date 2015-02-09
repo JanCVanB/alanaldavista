@@ -6,8 +6,8 @@ import re
 
 alpha = 0.85
 
-get_data_string = "NodeId:(\d*)(,\d*)?\t(\d*.\d*),(\d*.\d*)\,?(.*)?"
-get_data_regex = re.compile(get_data_string)
+# get_data_string = "NodeId:(\d*)(,\d*)?\t(\d*.\d*),(\d*.\d*)\,?(.*)?"
+# get_data_regex = re.compile(get_data_string)
 
 
 def pad_zeroes(x):
@@ -27,13 +27,14 @@ def line_parse(s):
 
     # Data is of form (index, [iteration,] current PageRank, previous PageRank,
     # list_of_neighbors)
-    data = get_data_regex.match(s).groups()
+    # data = get_data_regex.match(s).groups()
+    data = re.match("NodeId:(\d*),?(\d*)\t(\d*.\d*),(\d*.\d*),?(.*)", s).groups()
 
     # If there is no iteration AKA first iteration
-    if data[1] is None:
+    if data[1] == "":
         data = (data[0], "0", data[2], data[3], data[4].split(","))
     else:
-        data = (data[0], data[1][1:], data[2], data[3], data[4].split(","))
+        data = (data[0], data[1], data[2], data[3], data[4].split(","))
 
     return data
 
