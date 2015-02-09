@@ -13,7 +13,9 @@ get_data_regex = re.compile(get_data_string)
 def pad_zeroes(x):
     """pad_zeroes takes a string representation of an integer and returns
     a length of 9 representation of it. For sorting purposes."""
-    if len(x) > 9:
+    if len(x) == 9:
+        return x
+    elif len(x) > 9:
         raise ValueError("Cannot handle indices greater than 999,999,999.")
     return (9 - len(x)) * "0" + x
 
@@ -41,10 +43,10 @@ for line in sys.stdin:
     # output is either iNUM\trNUM which is part of PageRank of i
     # or iNUM\tvSTRINGofNUMS which is the way we're saving the data.
     for friend in data[4]:
-        sys.stdout.write("i%s\tr%s\n" % (pad_zeroes(friend),
-                                         alpha * float(data[2])
-                                         / float(len(data[4]))))
+        sys.stdout.write("%s\tr%s\n" % (pad_zeroes(friend),
+                                        alpha * float(data[2])
+                                        / float(len(data[4]))))
 
-    sys.stdout.write("i%s\tv%s\n" % (pad_zeroes(data[0]),
+    sys.stdout.write("%s\tv%s\n" % (pad_zeroes(data[0]),
                      data[1] + "," + data[2] + "," + data[3]
                      + "," + ",".join(data[4])))

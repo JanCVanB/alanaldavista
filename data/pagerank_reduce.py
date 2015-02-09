@@ -20,7 +20,6 @@ key_data = key_data_default[:]
 
 for line in sys.stdin:
     (key, value) = line.split("\t")
-    key = key[1:]
 
     if prev_key is None:
         prev_key = key
@@ -29,7 +28,8 @@ for line in sys.stdin:
     # data as the computation is over. "is not None" prevents an empty flush
     # at the beginning.
     if prev_key is not None and key != prev_key:
-        sys.stdout.write("%s\t%s\n" % (prev_key, str(key_data)))
+        key_data[1] = str(key_data[1])
+        sys.stdout.write("%s\t%s\n" % (prev_key, ",".join(key_data)))
         key_data = key_data_default[:]
         prev_key = key
 
@@ -45,4 +45,5 @@ for line in sys.stdin:
         key_data[2] = value[1]
         key_data[3] = value[3]
 
-sys.stdout.write("%s\t%s\n" % (prev_key, str(key_data)))
+key_data[1] = str(key_data[1])
+sys.stdout.write("%s\t%s\n" % (prev_key, ",".join(key_data)))
