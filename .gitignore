@@ -1,2 +1,3 @@
 /AWSkeys.txt
 .idea/
+*.pyc
