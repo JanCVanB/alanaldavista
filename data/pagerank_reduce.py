@@ -15,7 +15,7 @@ prev_key = None
 # Key data is of form iteration, current PageRank, previous PageRank,
 # neighbors.
 key_data_default = [-1, 1 - alpha, "-1", ""]
-key_data = key_data_default
+key_data = key_data_default[:]
 
 
 for line in sys.stdin:
@@ -30,7 +30,7 @@ for line in sys.stdin:
     # at the beginning.
     if prev_key is not None and key != prev_key:
         sys.stdout.write("%s\t%s\n" % (prev_key, str(key_data)))
-        key_data = key_data_default
+        key_data = key_data_default[:]
         prev_key = key
 
     # This tuple is part of PageRank summation.
@@ -44,3 +44,5 @@ for line in sys.stdin:
         key_data[0] = str(int(value[0]) + 1)
         key_data[2] = value[1]
         key_data[3] = value[3]
+
+sys.stdout.write("%s\t%s\n" % (prev_key, str(key_data)))
