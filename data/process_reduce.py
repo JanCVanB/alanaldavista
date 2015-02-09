@@ -26,6 +26,13 @@ def compute_min():
             min_pagerank = pagerank
 
 
+def unpad_zeroes(s):
+    n = 0
+    while s[n] == "0":
+        n += 1
+    return s[n:]
+
+
 for line in sys.stdin:
     # Get iterations.
     if line[11] is ",":
@@ -64,4 +71,4 @@ if top_20:
     top_20_sorted = sorted(top_20.items(), key=operator.itemgetter(1))
     top_20_sorted.reverse()
     for node, pagerank in top_20_sorted:
-        sys.stdout.write("FinalRank:%f\t%s\n" % (pagerank, node))
+        sys.stdout.write("FinalRank:%f\t%s\n" % (pagerank, unpad_zeroes(node)))
