@@ -59,9 +59,9 @@ def test_gnp_final_20_lines():
             lines = enron_output_file.readlines()
             assert lines, '{} is blank'.format(GNP_OUTPUT)
             done = lines[0].startswith('FinalRank')
-        if done:
-            assert 20 == len(enron_output_file.readlines()), \
-                   'Final {} does not have 20 lines'.format(GNP_OUTPUT)
-        else:
-            assert lines[0].startswith('NodeId'), \
-                   'Interim {} does not start with "NodeId"'.format(GNP_OUTPUT)
+            if done:
+                assert 20 == len(enron_output_file.readlines()), \
+                    'Final {} does not have 20 lines'.format(GNP_OUTPUT)
+            else:
+                assert lines[0].startswith('NodeId'), \
+                    'Interim {} does not start with "NodeId"'.format(GNP_OUTPUT)

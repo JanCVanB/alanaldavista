@@ -14,7 +14,7 @@ prev_key = None
 
 # Key data is of form iteration, current PageRank, previous PageRank,
 # neighbors.
-key_data_default = [-1, 1 - alpha, "-1", ""]
+key_data_default = ["-1", 1 - alpha, "-1", ""]
 key_data = key_data_default[:]
 
 

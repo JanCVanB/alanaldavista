@@ -49,4 +49,4 @@ for line in sys.stdin:
 
     sys.stdout.write("%s\tv%s\n" % (pad_zeroes(data[0]),
                      data[1] + "," + data[2] + "," + data[3]
-                     + "," + ",".join(data[4])))
+                     + "," + ",".join(map(lambda s: pad_zeroes(s), data[4]))))
