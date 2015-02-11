@@ -6,7 +6,7 @@ import re
 
 alpha = 0.85
 
-# get_values_string = "v(\d+),(\d*.\d*),(\d*.\d*),?(.*)?"
+# get_values_string = "v(\d+),(\d*.\d*),\d*.\d*,?(.*)?"
 # get_values_regex = re.compile(get_values_string)
 
 key = None
@@ -35,16 +35,16 @@ for line in sys.stdin:
 
     # This tuple is part of PageRank summation.
     if value[0] is "r":
-        key_data[1] += float(value[1:])
+        key_data[1] += alpha * float(value[1:])
 
     # This tuple contains the other information for the node.
     else:
         # value = get_values_regex.match(value).groups()
-        value = re.match("v(\d+),(\d*.\d*),(\d*.\d*),?(.*)", value).groups()
+        value = re.match("v(\d+),(\d*.\d*),\d*.\d*,?(.*)", value).groups()
         # Increase iteration
         key_data[0] = str(int(value[0]) + 1)
         key_data[2] = value[1]
-        key_data[3] = value[3]
+        key_data[3] = value[2]
 
 key_data[1] = str(key_data[1])
 sys.stdout.write("%s\t%s\n" % (prev_key, ",".join(key_data)))

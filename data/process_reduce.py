@@ -39,7 +39,7 @@ for line in sys.stdin:
         iteration = int(line[10:12])
 
     # End computation.
-    if iteration == 10:
+    if iteration == 15:
         node = line[:9]
         # score = float(get_score_regex.match(line).group(1))
         score = float(re.match("\d{9}\t\d{1,2},(\d*.\d*)", line).group(1))

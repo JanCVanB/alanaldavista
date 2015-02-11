@@ -4,8 +4,6 @@ import sys
 import re
 
 
-alpha = 0.85
-
 # get_data_string = "NodeId:(\d*)(,\d*)?\t(\d*.\d*),(\d*.\d*)\,?(.*)?"
 # get_data_regex = re.compile(get_data_string)
 
@@ -45,7 +43,7 @@ for line in sys.stdin:
     # or iNUM\tvSTRINGofNUMS which is the way we're saving the data.
     for friend in data[4]:
         sys.stdout.write("%s\tr%s\n" % (pad_zeroes(friend),
-                                        alpha * float(data[2])
+                                        float(data[2])
                                         / float(len(data[4]))))
 
     sys.stdout.write("%s\tv%s\n" % (pad_zeroes(data[0]),
