@@ -41,11 +41,21 @@ for line in sys.stdin:
     data = line_parse(line)
     # output is either iNUM\trNUM which is part of PageRank of i
     # or iNUM\tvSTRINGofNUMS which is the way we're saving the data.
-    for friend in data[4]:
-        sys.stdout.write("%s\tr%s\n" % (pad_zeroes(friend),
-                                        float(data[2])
-                                        / float(len(data[4]))))
+    if data[4][0] == "":
+        sys.stdout.write("%s\tr%s\n" % (pad_zeroes(data[0]), float(data[2])))
+    else:
+        for friend in data[4]:
+            sys.stdout.write("%s\tr%s\n" % (pad_zeroes(friend),
+                                            float(data[2])
+                                            / float(len(data[4]))))
+
+    list_of_friends = data[4]
+
+    if data[4][0] == "":
+        list_of_friends = ""
+    else:
+        list_of_friends = "," + ",".join(map(lambda s: pad_zeroes(s), data[4]))
 
     sys.stdout.write("%s\tv%s\n" % (pad_zeroes(data[0]),
                      data[1] + "," + data[2] + "," + data[3]
-                     + "," + ",".join(map(lambda s: pad_zeroes(s), data[4]))))
+                     + list_of_friends))
