@@ -1,13 +1,13 @@
 #!/usr/bin/env python
-
 import sys
-
 # TODO: FIGURE OUT WHAT THIS IS FOR
 
-#
-# This program simply represents the identity function.
-#
 
-for line in sys.stdin:
-    sys.stdout.write(line)
+def run(inputs):
+    for line in inputs:
+        yield line
 
+
+if __name__ == '__main__':
+    for output_string in run(sys.stdin):
+        sys.stdout.write(output_string)
