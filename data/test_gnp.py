@@ -1,3 +1,4 @@
+from __future__ import with_statement
 import pagerank_map
 import pagerank_reduce
 import process_map
@@ -45,5 +46,10 @@ def test_max_iterations():
     with open('../sols/GnPn100p05') as solution_file:
         solutions = list(solution_file)
     assert len(inputs) == len(solutions), 'Final output is the incorrect length'
-    print('\n'.join(inputs))
+    print(''.join(inputs))
     assert all([solutions[i] in inputs[i] for i in range(len(solutions))]), 'Final output is incorrect'
+
+if __name__ == '__main__':
+    test_1_iteration()
+    test_2_iterations()
+    test_max_iterations()

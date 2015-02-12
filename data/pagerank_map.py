@@ -27,7 +27,7 @@ def pad_zeroes(x):
     a length of 9 representation of it. For sorting purposes."""
     if len(x) == 9:
         return x
-    elif len(x) > 9:
+    if len(x) > 9:
         raise ValueError('Cannot handle indices greater than 999,999,999.')
     return (9 - len(x)) * '0' + x
 
@@ -40,16 +40,16 @@ def run(inputs):
         # output is either iNUM\trNUM which is part of PageRank of i
         # or iNUM\tvSTRINGofNUMS which is the way we're saving the data.
         if data[4][0] == "":
-            yield '{}\tr{}\n'.format(pad_zeroes(data[0]), float(data[2]))
+            yield '%s\tr%s\n' % (pad_zeroes(data[0]), float(data[2]))
         else:
             for friend in data[4]:
-                yield '{}\tr{}\n'.format(pad_zeroes(friend), float(data[2]) / float(len(data[4])))
+                yield '%s\tr%s\n' % (pad_zeroes(friend), float(data[2]) / float(len(data[4])))
         list_of_friends = data[4]
         if data[4][0] == '':
             list_of_friends = ''
         else:
             list_of_friends = ',' + ','.join(map(lambda s: pad_zeroes(s), data[4]))
-        yield '{}\tv{}\n'.format(pad_zeroes(data[0]), data[1] + ',' + data[2] + ',' + data[3] + list_of_friends)
+        yield '%s\tv%s\n' % (pad_zeroes(data[0]), data[1] + ',' + data[2] + ',' + data[3] + list_of_friends)
 
 
 if __name__ == '__main__':

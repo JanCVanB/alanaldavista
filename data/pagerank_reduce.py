@@ -25,14 +25,14 @@ def run(inputs):
         # at the beginning.
         if prev_key is not None and key != prev_key:
             key_data[1] = str(key_data[1])
-            yield '{}\t{}\n'.format(prev_key, ','.join(key_data))
+            yield '%s\t%s\n' % (prev_key, ','.join(key_data))
             key_data = key_data_default[:]
             prev_key = key
 
         # This tuple is part of PageRank summation.
         if value[0] is 'r':
             key_data[1] += ALPHA * float(value[1:])
-        # This tuple contains the other information for the node.
+        # This tuple contains the other i % ion for the node.
         else:
             value = re.match('v(\d+),(\d*.\d*),\d*.\d*,?(.*)', value).groups()
             # Increase iteration
@@ -41,7 +41,7 @@ def run(inputs):
             key_data[3] = value[2]
 
     key_data[1] = str(key_data[1])
-    yield '{}\t{}\n'.format(prev_key, ','.join(key_data))
+    yield '%s\t%s\n' % (prev_key, ','.join(key_data))
 
 
 if __name__ == '__main__':

@@ -54,13 +54,13 @@ def run(input_strings):
             else:
                 rest_of_data = line[12:]
             # rest_of_data already has newline.
-            yield 'NodeId:{},{:d}\t{}'.format(line[:9], iteration, rest_of_data)
+            yield 'NodeId:%s,%d\t%s' % (line[:9], iteration, rest_of_data)
 
     # If we're done.
     if top_20:
         top_20_sorted = sorted(top_20.items(), key=operator.itemgetter(1), reverse=True)
         for node, pagerank in top_20_sorted:
-            yield 'FinalRank:{:f}\t{}\n'.format(pagerank, unpad_zeroes(node))
+            yield 'FinalRank:%f\t%s\n' % (pagerank, unpad_zeroes(node))
 
 
 if __name__ == '__main__':
