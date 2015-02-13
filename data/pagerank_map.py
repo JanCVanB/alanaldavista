@@ -13,7 +13,6 @@ def line_parse(s):
     to, and if this isn't the first iteration, the iteration number."""
     # Data is of form (index, [iteration,] current PageRank, previous PageRank,
     # list_of_neighbors)
-    sys.stderr.write(s)
     data = re.match('NodeId:(\d*),?(\d*)\t(\d*.\d*),(\d*.\d*),?(.*)', s).groups()
     # If there is no iteration AKA first iteration
     if not data[1]:
