@@ -3,8 +3,7 @@ import sys
 import re
 
 
-# get_data_string = 'NodeId:(\d*)(,\d*)?\t(\d*.\d*),(\d*.\d*)\,?(.*)?'
-# get_data_regex = re.compile(get_data_string)
+get_data_regex = re.compile('NodeId:(\d*),?(\d*)\t(\d*.\d*),(\d*.\d*),?(.*)')
 
 
 def line_parse(s):
@@ -13,7 +12,7 @@ def line_parse(s):
     to, and if this isn't the first iteration, the iteration number."""
     # Data is of form (index, [iteration,] current PageRank, previous PageRank,
     # list_of_neighbors)
-    data = re.match('NodeId:(\d*),?(\d*)\t(\d*.\d*),(\d*.\d*),?(.*)', s).groups()
+    data = get_data_regex.match(s).groups()
     # If there is no iteration AKA first iteration
     if not data[1]:
         data = (data[0], '0', data[2], data[3], data[4].split(","))

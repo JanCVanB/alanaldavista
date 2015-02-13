@@ -5,6 +5,7 @@ import operator
 
 
 MAX_ITERATIONS = 15
+get_data_regex = re.compile('(\d+),(\d*.\d*)(.*)')
 
 
 def compute_min(min_node, top_20):
@@ -25,7 +26,7 @@ def run(input_strings):
     for line in input_strings:
         (node, value) = line.split('\t')
 
-        (iteration, score, rest) = re.match('(\d+),(\d*.\d*)(.*)', value).groups()
+        (iteration, score, rest) = get_data_regex.match(value).groups()
         iteration = int(iteration)
         score = float(score)
         # Get iterations.
