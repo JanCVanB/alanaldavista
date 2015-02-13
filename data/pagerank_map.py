@@ -21,26 +21,20 @@ def line_parse(s):
     return data
 
 
-def run(inputs):
-    for line in inputs:
-        if not line:
-            continue
-        data = line_parse(line)
-        # output is either iNUM\trNUM which is part of PageRank of i
-        # or iNUM\tvSTRINGofNUMS which is the way we're saving the data.
-        if data[4][0] == "":
-            yield '%s\tr%s\n' % (data[0], float(data[2]))
-        else:
-            for friend in data[4]:
-                yield '%s\tr%s\n' % (friend, float(data[2]) / float(len(data[4])))
-        list_of_friends = data[4]
-        if data[4][0] == '':
-            list_of_friends = ''
-        else:
-            list_of_friends = ',' + ','.join(data[4])
-        yield '%s\tv%s\n' % (data[0], data[1] + ',' + data[2] + ',' + data[3] + list_of_friends)
-
-
-if __name__ == '__main__':
-    for output_string in run(sys.stdin):
-        sys.stdout.write(output_string)
+for line in sys.stdin:
+    if not line:
+        continue
+    data = line_parse(line)
+    # output is either iNUM\trNUM which is part of PageRank of i
+    # or iNUM\tvSTRINGofNUMS which is the way we're saving the data.
+    if data[4][0] == "":
+        sys.stdout.write('%s\tr%s\n' % (data[0], float(data[2])))
+    else:
+        for friend in data[4]:
+            sys.stdout.write('%s\tr%s\n' % (friend, float(data[2]) / float(len(data[4]))))
+    list_of_friends = data[4]
+    if data[4][0] == '':
+        list_of_friends = ''
+    else:
+        list_of_friends = ',' + ','.join(data[4])
+    sys.stdout.write('%s\tv%s\n' % (data[0], data[1] + ',' + data[2] + ',' + data[3] + list_of_friends))
