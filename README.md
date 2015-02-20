@@ -4,8 +4,6 @@ PageRank calculation algorithms to run on Amazon Elastic MapReduce (for Caltech 
 
 Future students of CS144 should **NOT** view the contents of this repository or read below this point. Doing so is a direct violation of the honor code.
 
-![](http://i.imgur.com/YxxoCRX.gif)
-
 
 ## Algorithm Pseudocode (for Amazon EMR)
 
@@ -20,7 +18,7 @@ Future students of CS144 should **NOT** view the contents of this repository or 
 
 ## Approach
 
-We adopted an Occam’s Razor approach to the problem: more complicated solutions may ultimately prove correct, but in the absence of certainty the fewer assumptions that are made, the better.
+We adopted an Occam’s Razor approach to the problem: more complicated solutions may ultimately prove correct, but the fewer assumptions the better.
 
 Because the data sets for processing were not known in advance, no assumptions about structure were possible and without any such knowledge it was difficult to optimize to take advantage of any specific characteristics of the network graph.
 
