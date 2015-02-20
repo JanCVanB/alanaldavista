@@ -1,11 +1,11 @@
 # AlanAldaVista
 
-PageRank calculation algorithms to run on Amazon Elastic MapReduce (for Caltech Winter 2015 CS144).
+PageRank calculation using Amazon Elastic MapReduce (for Caltech Winter 2015 CS144)
 
 Future students of CS144 should **NOT** view the contents of this repository or read below this point. Doing so is a direct violation of the honor code.
 
 
-## Algorithm Pseudocode (for Amazon EMR)
+## Algorithm Pseudocode (using Amazon EMR)
 
 <img src="http://i.imgur.com/YxxoCRX.gif" alt="Alan Alda pseudocoding" width="300" align="right"/>
 
