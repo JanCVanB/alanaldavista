@@ -16,6 +16,7 @@ key_data = key_data_default[:]
 
 for line in sys.stdin:
     (key, value) = line.split('\t')
+
     if prev_key is None:
         prev_key = key
 
@@ -31,6 +32,7 @@ for line in sys.stdin:
     # This tuple is part of PageRank summation.
     if value[0] is 'r':
         key_data[1] += ALPHA * float(value[1:])
+
     # This tuple contains the other i % ion for the node.
     else:
         value = re.match('v(\d+),(\d*.\d*),\d*.\d*,?(.*)', value).groups()

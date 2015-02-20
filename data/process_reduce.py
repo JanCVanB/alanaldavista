@@ -8,8 +8,13 @@ MAX_ITERATIONS = 15
 get_data_regex = re.compile('(\d+),(\d*.\d*)(.*)')
 
 
-def compute_min(min_node, top_20):
+def compute_min(top_20):
+    """compute_min takes a min_node string and a dictionary of the PageRanks of
+    the current top 20 nodes."""
+
     min_pagerank = None
+    min_node = None
+
     for node, pagerank in top_20.iteritems():
         if min_pagerank is None:
             min_node = node
@@ -17,11 +22,12 @@ def compute_min(min_node, top_20):
         elif pagerank < min_pagerank:
             min_node = node
             min_pagerank = pagerank
+
     return min_node, min_pagerank
 
 
-min_node = '-1'
 top_20 = {}
+
 for line in sys.stdin:
     (node, value) = line.split('\t')
 
@@ -35,7 +41,7 @@ for line in sys.stdin:
         if len(top_20) < 20:
             top_20[node] = score
         else:
-            min_node, min_pagerank = compute_min(min_node, top_20)
+            min_node, min_pagerank = compute_min(top_20)
             if top_20[min_node] < score:
                 del top_20[min_node]
                 top_20[node] = score

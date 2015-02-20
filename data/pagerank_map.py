@@ -10,6 +10,7 @@ def line_parse(s):
     """line_parse takes a "NodeID..." string and returns a tuple of its
     identifier, current PageRank, previous PageRank, the nodes its node links
     to, and if this isn't the first iteration, the iteration number."""
+
     # Data is of form (index, [iteration,] current PageRank, previous PageRank,
     # list_of_neighbors)
     data = get_data_regex.match(s).groups()
@@ -21,20 +22,27 @@ def line_parse(s):
     return data
 
 
+# Get data from Hadoop Streaming API.
 for line in sys.stdin:
+
     if not line:
         continue
+
     data = line_parse(line)
-    # output is either iNUM\trNUM which is part of PageRank of i
+
+    # output is either iNUM\trNUM which is part of the next PageRank of i
     # or iNUM\tvSTRINGofNUMS which is the way we're saving the data.
     if data[4][0] == "":
         sys.stdout.write('%s\tr%s\n' % (data[0], float(data[2])))
     else:
         for friend in data[4]:
             sys.stdout.write('%s\tr%s\n' % (friend, float(data[2]) / float(len(data[4]))))
+
     list_of_friends = data[4]
+
     if data[4][0] == '':
         list_of_friends = ''
     else:
         list_of_friends = ',' + ','.join(data[4])
+
     sys.stdout.write('%s\tv%s\n' % (data[0], data[1] + ',' + data[2] + ',' + data[3] + list_of_friends))
